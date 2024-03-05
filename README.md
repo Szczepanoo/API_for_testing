@@ -1,2 +1,2 @@
-# API_for_testing
-API for Code Testing and Optimization classes
+# App_for_testing
+Application for Code Testing and Optimization classes
