@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify, redirect, send_from_directory
 import requests
 
 app = Flask(__name__)
@@ -8,6 +8,11 @@ API_URL = "https://jsonplaceholder.typicode.com"
 @app.route('/favicon.ico')
 def favicon():
     return redirect('/static/favicon.ico')
+
+@app.route('/static/style.css')
+def css():
+    return send_from_directory('static', 'style.css')
+
 
 @app.route('/')
 def index():
