@@ -13,6 +13,10 @@ def favicon():
 def css():
     return send_from_directory('static', 'style.css')
 
+@app.route('/static/other_style.css')
+def css_other_style():
+    return send_from_directory('static', 'other_style.css')
+
 
 @app.route('/')
 def index():
