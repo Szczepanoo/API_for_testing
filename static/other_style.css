@@ -21,7 +21,7 @@ td {
 
 td:hover {
   color: rgb(215, 160, 71);
-  cursor: grab;
+  cursor: pointer;
   background-color: #5e96ee;
 }
 
@@ -57,6 +57,7 @@ table {
 .return:hover {
   background-color: #5e96ee;
   color: rgb(215, 160, 71);
+  cursor: pointer;
 }
 
 h3 {
@@ -65,4 +66,62 @@ h3 {
 
 a {
   text-decoration: none;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.post {
+  background-color: #4389de;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.post:hover {
+  background-color: #5e96ee;
+  cursor: pointer;
+}
+
+.post h2 {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-top: 0;
+  color: burlywood;
+}
+
+.post p {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.post_body {
+  font-style: italic;
+}
+
+.post_view {
+  background-color: #4389de;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+  align-content: center;
+}
+
+.post_view h2 {
+  font-size: 40px;
+  font-weight: bolder;
+  margin-top: 0;
+  color: burlywood;
+}
+
+.post_view p {
+  font-size: 20px;
+  color: #ffffff;
 }
