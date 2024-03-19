@@ -108,30 +108,37 @@ a {
 
 .modal {
   display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  background-color: #5e96ee;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 10px;
-  animation-name: zoom;
-  animation-duration: 0.3s;
+  background-color: #4389de;
+    margin: auto;
+    margin-top: 10%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .modal-content .post-body {
   font-style: italic;
+}
+
+.modal-content img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 @keyframes zoom {
@@ -148,12 +155,12 @@ a {
   float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .close:hover, .close:focus {
   color: #f66f6f;
   text-decoration: none;
-  cursor: pointer;
 }
 
 .filter{
@@ -223,4 +230,37 @@ a {
   font-size: 14px;
   color: #ffffff;
   font-style: italic;
+}
+
+.photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.photo {
+    width: calc(20% - 20px); /* Ustaw szerokość każdego zdjęcia na 20% szerokości ekranu minus odstęp */
+}
+
+#photo:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#view {
+  background-color: rgb(215, 160, 71);
+  border-radius: 10px;
+  color: #4389de;
+  text-align: left;
+  font-weight: bold;
+  width: 60px;
+  padding: 10px;
+}
+
+#view:hover {
+  background-color: burlywood;
+  color: #4389de;
+  cursor: pointer;
 }

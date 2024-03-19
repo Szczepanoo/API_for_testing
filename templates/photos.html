@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('css_other_style') }}"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('css_other_style') }}">
     <title>Photos</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <header>
         <a href="./"><h3 class="return">Return</h3></a>
-    <h1>Photos</h1>
+        <h1>Photos</h1>
     </header>
     <div class="contener">
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Album ID</th>
-            <th>Title</th>
-            <th>URL</th>
-            <th>Thumbnail URL</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for photo in photos %}
-          <tr>
-            <td>{{ photo.id }}</td>
-            <td>{{ photo.albumId }}</td>
-            <td>{{ photo.title }}</td>
-            <td><a href="{{ photo.url }}" target="_blank">View</a></td>
-            <td><img src="{{ photo.thumbnailUrl }}" alt="Thumbnail" /></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <div class="photos-container">
+            {% for photo in photos %}
+            <div class="photo" onclick="showModal('{{ photo.title }}', '{{ photo.url }}', '{{ photo.thumbnailUrl }}', '{{ photo.albumId }}')">
+                <img id="photo" src="{{ photo.thumbnailUrl }}" alt="Photo">
+            </div>
+            {% endfor %}
+        </div>
     </div>
-  </body>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalPhoto" src="" alt="Photo">
+            <h2 id="modalTitle"></h2>
+            <p id="modalAlbumId"></p>
+            <p id="modalUrl"></p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(title, url, thumbnailUrl, albumId) {
+            const modal = document.getElementById('myModal');
+            const modalPhoto = document.getElementById('modalPhoto');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalAlbumId = document.getElementById('modalAlbumId');
+            const modalUrl = document.getElementById('modalUrl');
+
+            modalPhoto.src = thumbnailUrl;
+            modalTitle.innerText = title;
+            modalAlbumId.innerText = "Album ID: " + albumId;
+            modalUrl.innerHTML = `<a id="view" href="${url}" target="_blank">View</a>`;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
 </html>
