@@ -1,44 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('css_other_style') }}"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('css_other_style') }}">
     <title>Comments</title>
-  </head>
-
-  <body>
+</head>
+<body>
     <header>
         <a href="./"><h3 class="return">Return</h3></a>
         <h1>Comments</h1>
     </header>
     <div class="contener">
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Post ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Body</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for comment in comments %}
-          <tr>
-            <td>{{ comment.id }}</td>
-            <td>{{ comment.postId }}</td>
-            <td>{{ comment.name }}</td>
-            <td>{{ comment.email }}</td>
-            <td>{{ comment.body }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <div class="container" id="comments">
+            {% for comment in comments %}
+            <div class="comment" onclick="showModal('{{ comment.name }}', '{{ comment.email }}', '{{ comment.body }}', '{{ comment.userId }}')">
+                <h2>{{ comment.name }}</h2>
+                <p>{{ comment.email }}</p>
+                <p>{{ comment.body }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-  </body>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="commentName"></h2>
+            <p id="commentEmail"></p>
+            <p id="commentBody"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const comments = document.querySelectorAll('.comment');
+        const modal = document.getElementById('myModal');
+        const closeBtn = document.querySelector('.close');
+
+        comments.forEach(comment => {
+            comment.addEventListener('click', () => {
+                showModal(comment);
+            });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+
+        function showModal(comment)
+        {
+            const name = comment.querySelector('h2').innerText;
+            const email = comment.querySelector('p:nth-of-type(1)').innerText;
+            const body = comment.querySelector('p:nth-of-type(2)').innerText;
+
+            document.getElementById('commentName').innerText = name;
+            document.getElementById('commentEmail').innerText = "mail: " + email;
+            document.getElementById('commentBody').innerText = body;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+        modal.style.display = 'none';
+        }
+        });
+
+    </script>
+</body>
 </html>

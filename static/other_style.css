@@ -198,3 +198,29 @@ a {
   text-align: center;
   flex-grow: 1;
 }
+
+.comment {
+  background-color: #4389de;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+.comment:hover {
+  background-color: #5e96ee;
+  cursor: pointer;
+}
+
+.comment h2 {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-top: 0;
+  color: burlywood;
+}
+
+.comment p {
+  font-size: 14px;
+  color: #ffffff;
+  font-style: italic;
+}
