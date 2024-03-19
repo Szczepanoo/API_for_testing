@@ -6,7 +6,6 @@ body {
 
 h1 {
   text-align: center;
-  margin-top: 50px;
   font-size: 50px;
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -23,7 +22,7 @@ td {
 td:hover {
   color: rgb(215, 160, 71);
   cursor: grab;
-  background-color: #7cadef;
+  background-color: #5e96ee;
 }
 
 table {
@@ -44,4 +43,26 @@ table {
   margin: 0 auto;
   width: 80%;
   border-radius: 20px;
+}
+
+.return {
+  background-color: #4389de;
+  border-radius: 10px;
+  color: burlywood;
+  text-align: left;
+  width: 60px;
+  margin-left: 100px;
+}
+
+.return:hover {
+  background-color: #5e96ee;
+  color: rgb(215, 160, 71);
+}
+
+h3 {
+  padding: 15px;
+}
+
+a {
+  text-decoration: none;
 }
