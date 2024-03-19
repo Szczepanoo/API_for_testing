@@ -151,15 +151,20 @@ a {
 }
 
 .close:hover, .close:focus {
-  color: #ee4848;
+  color: #f66f6f;
   text-decoration: none;
   cursor: pointer;
 }
 
 .filter{
-  margin: 0 auto;
-  text-align: center;
+  position: relative;
   font-size: 24px;
+  background-color: #5e96ee;
+  padding: 25px;
+  width: fit-content;
+  border: 1px solid #f66f6f;
+  border-radius: 10px;
+
 }
 
 #apply_button {
@@ -170,12 +175,26 @@ a {
   color: burlywood;
   border-style: none;
   margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 #apply_button:hover {
   margin-top: 10px;
   font-size: 24px;
-  background-color: #5e96ee;
+  background-color: #84acec;
   color: rgb(215,160,71);
   cursor: pointer;
+}
+
+.sort {
+  display: flex;
+  align-items: center; /* Wyśrodkowanie wertykalne */
+  justify-content: space-between; /* Rozstawienie na całej szerokości */
+}
+
+.title {
+  margin-left: 500px;
+  text-align: center;
+  flex-grow: 1;
 }
