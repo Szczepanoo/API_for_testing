@@ -13,15 +13,58 @@
     </header>
     <div class="container">
         {% for post in posts %}
-        <a href="./post.html">
-            <div class="post">
-                <h2>{{ post.title }}</h2>
-                <p class="post_body">{{ post.body }}</p>
-                <p>User ID: {{ post.userId }}</p>
-                <p>ID: {{ post.id }}</p>
-            </div>
-        </a>
+        <div class="post" onclick="showModal('{{ post.title }}', '{{ post.body }}', '{{ post.userId }}', '{{ post.id }}')">
+            <h2>{{ post.title }}</h2>
+            <p class="post_body">{{ post.body }}</p>
+            <p>User ID: {{ post.userId }}</p>
+            <p>ID: {{ post.id }}</p>
+        </div>
         {% endfor %}
     </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="postTitle"></h2>
+            <p id="postBody"></p>
+            <p>User ID: <span id="postUserId"></span></p>
+            <p>ID: <span id="postId"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const posts = document.querySelectorAll('.post');
+    const modal = document.getElementById('myModal');
+    const closeBtn = document.querySelector('.close');
+
+    posts.forEach(post => {
+        post.addEventListener('click', () => {
+            showModal(post);
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    function showModal(post) {
+    const title = post.querySelector('h2').innerHTML;
+    const body = post.querySelector('.post_body').innerHTML;
+    const userId = post.querySelector('p:nth-child(3)').innerHTML.split(": ")[1]; // Pobieramy User ID
+    const id = post.querySelector('p:nth-child(4)').innerHTML.split(": ")[1]; // Pobieramy ID
+
+    document.getElementById('postTitle').innerHTML = title;
+    document.getElementById('postBody').innerHTML = body;
+    document.getElementById('postUserId').innerHTML = userId;
+    document.getElementById('postId').innerHTML = id;
+
+    modal.style.display = 'block';
+}
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+});
+
+    </script>
 </body>
 </html>

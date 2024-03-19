@@ -105,23 +105,53 @@ a {
   font-style: italic;
 }
 
-.post_view {
-  background-color: #4389de;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #5e96ee;
+  margin: 15% auto;
   padding: 20px;
-  width: 600px;
-  align-content: center;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 10px;
+  animation-name: zoom;
+  animation-duration: 0.3s;
 }
 
-.post_view h2 {
-  font-size: 40px;
-  font-weight: bolder;
-  margin-top: 0;
+.modal-content .post-body {
+  font-style: italic;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close {
   color: burlywood;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.post_view p {
-  font-size: 20px;
-  color: #ffffff;
+.close:hover, .close:focus {
+  color: #ee4848;
+  text-decoration: none;
+  cursor: pointer;
 }
