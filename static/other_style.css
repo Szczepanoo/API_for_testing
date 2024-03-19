@@ -155,3 +155,27 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
+.filter{
+  margin: 0 auto;
+  text-align: center;
+  font-size: 24px;
+}
+
+#apply_button {
+  font-size: 24px;
+  margin: auto;
+  display: block;
+  background-color: #4389de;
+  color: burlywood;
+  border-style: none;
+  margin-top: 10px;
+}
+
+#apply_button:hover {
+  margin-top: 10px;
+  font-size: 24px;
+  background-color: #5e96ee;
+  color: rgb(215,160,71);
+  cursor: pointer;
+}

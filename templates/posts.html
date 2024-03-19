@@ -10,8 +10,16 @@
     <header>
         <a href="./"><h3 class="return">Return</h3></a>
         <h1>Posts</h1>
+        <div class="filter">
+            <label for="minChars">Minimum length of post:</label>
+            <input type="number" id="minChars" name="minChars">
+
+            <label for="maxChars">Maximum length of post:</label>
+            <input type="number" id="maxChars" name="maxChars">
+        </div>
+        <button onclick="filterPosts()" id="apply_button">Apply</button>
     </header>
-    <div class="container">
+    <div class="container" id="posts">
         {% for post in posts %}
         <div class="post" onclick="showModal('{{ post.title }}', '{{ post.body }}', '{{ post.userId }}', '{{ post.id }}')">
             <h2>{{ post.title }}</h2>
@@ -64,6 +72,33 @@
         modal.style.display = 'none';
     }
 });
+        function filterPosts() {
+            var minChars = parseInt(document.getElementById("minChars").value);
+            var maxChars = parseInt(document.getElementById("maxChars").value);
+
+            var posts = document.getElementsByClassName("post");
+
+
+            if (minChars < 0 || maxChars < 0) {
+                alert("Filter values cannot be negative");
+                minCharsInput.value = "";
+                return;
+            }
+
+            for (var i = 0; i < posts.length; i++) {
+                var post = posts[i];
+                var postBody = post.querySelector(".post_body").innerText;
+                var postLength = postBody.length;
+
+                if ((minChars && postLength < minChars) || (maxChars && postLength > maxChars)) {
+                    post.style.display = "none";
+                } else {
+                    post.style.display = "block";
+                }
+            }
+        }
+
+
 
     </script>
 </body>
