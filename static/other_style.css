@@ -119,6 +119,9 @@ a {
 }
 
 .modal-content {
+  animation-name: zoom;
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1); /* Użyj funkcji kubicznej */
   background-color: #4389de;
     margin: auto;
     margin-top: 10%;
@@ -126,6 +129,7 @@ a {
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
+    min-width: 500px;
     border-radius: 10px;
     text-align: center;
 }
@@ -235,6 +239,7 @@ a {
 .photos-container {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
     gap: 20px;
     padding: 20px;
@@ -263,4 +268,30 @@ a {
   background-color: burlywood;
   color: #4389de;
   cursor: pointer;
+}
+
+.albums-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.album {
+    cursor: pointer;
+    width: calc(25% - 20px);
+    color: burlywood;
+    text-align: center; /* Wyśrodkowanie zawartości */
+    align-items: center;
+    background-color: #4389de;
+    border: 1px solid rgb(215, 160, 71);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px; /* Dodanie marginesu na dole dla odstępu między albumami */
+}
+
+.album:hover {
+    background-color: #5e96ee;
+    color: rgb(215, 160, 71);
 }
