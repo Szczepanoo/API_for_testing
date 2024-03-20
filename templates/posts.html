@@ -9,15 +9,20 @@
 <body>
     <header>
         <a href="./"><h3 class="return">Return</h3></a>
-        <h1>Posts</h1>
-        <div class="filter">
-            <label for="minChars">Minimum length of post:</label>
-            <input type="number" id="minChars" name="minChars">
-
-            <label for="maxChars">Maximum length of post:</label>
-            <input type="number" id="maxChars" name="maxChars">
+        <div class="sort">
+            <div class="title">
+                <h1>Posts</h1>
+            </div>
+            <div class="filter">
+                <label for="minChars">Minimum length of post:</label>
+                <input type="number" id="minChars" name="minChars">
+                <br>
+                <label for="maxChars">Maximum length of post:</label>
+                <input type="number" id="maxChars" name="maxChars">
+                <br>
+                <button onclick="filterPosts()" id="apply_button">Apply</button>
+            </div>
         </div>
-        <button onclick="filterPosts()" id="apply_button">Apply</button>
     </header>
     <div class="container" id="posts">
         {% for post in posts %}
