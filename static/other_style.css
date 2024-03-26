@@ -175,7 +175,16 @@ a {
   width: fit-content;
   border: 1px solid #f66f6f;
   border-radius: 10px;
+}
 
+.elements{
+  position: relative;
+  font-size: 24px;
+  background-color: #5e96ee;
+  padding: 25px;
+  width: fit-content;
+  border: 1px solid #f66f6f;
+  border-radius: 10px;
 }
 
 #apply_button {
@@ -202,6 +211,7 @@ a {
   display: flex;
   align-items: center; /* Wyśrodkowanie wertykalne */
   justify-content: space-between; /* Rozstawienie na całej szerokości */
+  padding: 20px;
 }
 
 .title {
@@ -294,4 +304,8 @@ a {
 .album:hover {
     background-color: #5e96ee;
     color: rgb(215, 160, 71);
+}
+
+.hidden {
+            display: none;
 }

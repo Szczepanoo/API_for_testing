@@ -9,7 +9,17 @@
 <body>
     <header>
         <a href="./"><h3 class="return">Return</h3></a>
-        <h1>Comments</h1>
+        <div class="sort">
+            <div class="title">
+                <h1>Comments</h1>
+            </div>
+            <div class="elements">
+                    <label for="num_of_elements">How many elements? </label>
+                    <input type="number" id="num_of_elements" name="num_of_elements">
+                    <br>
+                    <button onclick="numberOfElements()" id="apply_button">Apply</button>
+            </div>
+        </div>
     </header>
     <div class="contener">
         <div class="container" id="comments">
@@ -63,6 +73,20 @@
         modal.style.display = 'none';
         }
         });
+
+        function numberOfElements() {
+            var howMany = parseInt(document.getElementById("num_of_elements").value);
+
+            var comments = document.getElementsByClassName("comment");
+
+
+            if (howMany < 0) {
+                alert("Filter values cannot be negative");
+                //minCharsInput.value = "";
+                return;
+            }
+
+        }
 
     </script>
 </body>
