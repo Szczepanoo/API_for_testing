@@ -79,14 +79,24 @@
 
             var comments = document.getElementsByClassName("comment");
 
-
-            if (howMany < 0) {
-                alert("Filter values cannot be negative");
-                //minCharsInput.value = "";
-                return;
+            // Sprawdzenie, czy wprowadzona wartość jest liczbą dodatnią
+            if (isNaN(howMany) || howMany <= 0) {
+                howMany = comments.length;
             }
 
+            // Ukrycie wszystkich komentarzy
+            for (var i = 0; i < comments.length; i++) {
+                comments[i].style.display = 'none';
+            }
+
+            // Wyświetlenie tylko wybranych komentarzy
+            for (var i = 0; i < howMany; i++) {
+                if (comments[i]) {
+                    comments[i].style.display = 'block';
+                }
+            }
         }
+
 
     </script>
 </body>
