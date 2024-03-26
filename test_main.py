@@ -44,9 +44,11 @@ class TestApp(unittest.TestCase):
     @patch('main.requests.get')
     def test_search_posts(self, mock_get):
         mock_get.return_value.status_code = 200
-        response = self.app.post('/search_posts', json={'min_length': 5, 'max_length': 10})
+        response = self.app.post('/search_posts', json={'min_length': 5,
+                                                        'max_length': 10})
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Searching posts with character length between 5 and 10', response.data)
+        self.assertIn(b'Searching posts with character length between 5 and 10',
+                      response.data)
 
     @patch('main.requests.get')
     def test_handle_error(self, mock_get):
@@ -55,6 +57,7 @@ class TestApp(unittest.TestCase):
             response = client.get('/posts')
             self.assertEqual(response.status_code, 500)
             self.assertIn(b'An unexpected error occurred', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
