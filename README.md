@@ -2,12 +2,12 @@
 Welcome to JSONPlaceholder App! This is a simple web application built using Flask and HTML/CSS to interact with the JSONPlaceholder API, providing functionalities to view posts, comments, albums, and photos.
 
 ## Table of Contents
-- [Features](Features)
-- [Prerequisites](Prerequisites)
-- [Installation](Installation)
-- [Usage](Usage)
-- [Contributioning](Contributing)
-- [License](License)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 - View posts along with their details such as title, body, user ID, and post ID.
