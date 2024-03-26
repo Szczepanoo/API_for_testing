@@ -103,12 +103,15 @@ def get_photos():
 @app.route('/set_display_limit', methods=['POST'])
 def set_display_limit():
     """
-         Funkcja ustawia display limit
-                    :return: jsonify()
-        """
+    Funkcja ustawia limit wyświetlanych elementów
+    :return: jsonify()
+    """
     limit = request.json.get('limit')
-    # Code to set display limit
-    return jsonify({'message': f'Display limit set to {limit}'}), 200
+    if limit is not None and isinstance(limit, int) and limit > 0:
+        # Tutaj możesz dodać kod do ustawienia limitu wyświetlanych elementów
+        return jsonify({'message': f'Display limit set to {limit}'}), 200
+    else:
+        return jsonify({'error': 'Invalid display limit'}), 400
 
 
 @app.route('/search_posts', methods=['POST'])
