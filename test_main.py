@@ -47,8 +47,8 @@ class TestApp(unittest.TestCase):
         response = self.app.post('/search_posts', json={'min_length': 5,
                                                         'max_length': 10})
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Searching posts with character length between 5 and 10',
-                      response.data)
+        self.assertIn(b'Searching posts with character '
+                      b'length between 5 and 10', response.data)
 
     @patch('main.requests.get')
     def test_handle_error(self, mock_get):
