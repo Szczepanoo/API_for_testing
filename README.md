@@ -43,6 +43,7 @@ Before running this application, ensure you have the following installed:
 Contributions are welcome! If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. Please ensure that your code adheres to the existing code style and that appropriate tests have been added.
 
 ## License
-This project is licensed under the <a href="https://opensource.org/licenses/MIT">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
+This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
+<a href="https://www.gnu.org/licenses/gpl-3.0.en.html">
+  <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="GNU General Public License v3.0">
 </a>
