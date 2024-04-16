@@ -3,11 +3,16 @@ Ten moduł zawiera funkcje do obsługi aplikacji Flask
 """
 
 
-from flask import (Flask, render_template, request, jsonify,
-                   redirect, send_from_directory)
+import logging
+from flask import Flask, render_template, request, jsonify, redirect, send_from_directory
 import requests
+from requests.exceptions import HTTPError, Timeout
+from sqlalchemy.exc import DatabaseError
 
 app = Flask(__name__)
+
+# Konfiguracja logowania
+logging.basicConfig(filename='errors.log', level=logging.ERROR)
 
 API_URL = "https://jsonplaceholder.typicode.com"
 
@@ -127,6 +132,9 @@ def search_posts():
                                f'between {min_length} and {max_length}'}), 200
 
 
+"""
+    Logowanie błędów
+"""
 @app.errorhandler(Exception)
 def handle_error(error):
     """
@@ -137,6 +145,41 @@ def handle_error(error):
     app.logger.error('An error occurred: %s', error)
     return 'An unexpected error occurred', 500
 
+@app.errorhandler(HTTPError)
+def handle_http_error(error):
+    """
+    Obsługa błędów HTTP
+    """
+    app.logger.error('HTTP error occurred: %s', error)
+    return 'An unexpected HTTP error occurred', 500
+
+@app.errorhandler(Timeout)
+def handle_timeout_error(error):
+    """
+    Obsługa błędów timeout
+    """
+    app.logger.error('Timeout error occurred: %s', error)
+    return 'An unexpected timeout error occurred', 500
+
+@app.errorhandler(DatabaseError)
+def handle_database_error(error):
+    """
+    Obsługa błędów bazy danych
+    """
+    app.logger.error('Database error occurred: %s', error)
+    return 'An unexpected database error occurred', 500
+
+# Reszta twojego kodu bez zmian
+
+@app.errorhandler(Exception)
+def handle_error(error):
+    """
+    Funkcja obsługuje pozostałe błędy i loguje je do pliku dziennika
+    :param error: Wyjątek lub błąd
+    :return: Wiadomość błędu i status HTTP 500
+    """
+    app.logger.error('An error occurred: %s', error)
+    return 'An unexpected error occurred', 500
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
