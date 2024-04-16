@@ -72,7 +72,8 @@ class TestContract(unittest.TestCase):
         # Wywołanie endpointu /posts w aplikacji
         response = self.app.get('/posts')
 
-        # Sprawdzenie, czy odpowiedź od zewnętrznego API jest przetwarzana i zwracana poprawnie
+        # Sprawdzenie, czy odpowiedź od zewnętrznego API
+        # jest przetwarzana i zwracana poprawnie
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Test Post', response.data)
 
@@ -84,7 +85,8 @@ class TestContract(unittest.TestCase):
         # Wywołanie endpointu /set_display_limit w aplikacji
         response = self.app.post('/set_display_limit', json={'limit': 10})
 
-        # Sprawdzenie, czy odpowiedź od zewnętrznego API jest przetwarzana i zwracana poprawnie
+        # Sprawdzenie, czy odpowiedź od zewnętrznego API
+        # jest przetwarzana i zwracana poprawnie
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Display limit set to 10', response.data)
 
