@@ -4,7 +4,8 @@ Ten moduł zawiera funkcje do obsługi aplikacji Flask
 
 
 import logging
-from flask import Flask, render_template, request, jsonify, redirect, send_from_directory
+from flask import (Flask, render_template, request,
+                   jsonify, redirect, send_from_directory)
 import requests
 from requests.exceptions import HTTPError, Timeout
 from sqlalchemy.exc import DatabaseError
@@ -135,15 +136,7 @@ def search_posts():
 """
     Logowanie błędów
 """
-@app.errorhandler(Exception)
-def handle_error(error):
-    """
-         Funkcja zwraca bład, który wystąpił
-                    :param: error
-                    :return: app.logger.error()
-        """
-    app.logger.error('An error occurred: %s', error)
-    return 'An unexpected error occurred', 500
+
 
 @app.errorhandler(HTTPError)
 def handle_http_error(error):
@@ -153,6 +146,7 @@ def handle_http_error(error):
     app.logger.error('HTTP error occurred: %s', error)
     return 'An unexpected HTTP error occurred', 500
 
+
 @app.errorhandler(Timeout)
 def handle_timeout_error(error):
     """
@@ -160,6 +154,7 @@ def handle_timeout_error(error):
     """
     app.logger.error('Timeout error occurred: %s', error)
     return 'An unexpected timeout error occurred', 500
+
 
 @app.errorhandler(DatabaseError)
 def handle_database_error(error):
@@ -169,7 +164,6 @@ def handle_database_error(error):
     app.logger.error('Database error occurred: %s', error)
     return 'An unexpected database error occurred', 500
 
-# Reszta twojego kodu bez zmian
 
 @app.errorhandler(Exception)
 def handle_error(error):
@@ -181,7 +175,7 @@ def handle_error(error):
     app.logger.error('An error occurred: %s', error)
     return 'An unexpected error occurred', 500
 
+
 if __name__ == '__main__':
     print("Aplikacja uruchomiona. Przejdź do:", "http://127.0.0.1:5000/")
     app.run(debug=True, use_reloader=False)
-
