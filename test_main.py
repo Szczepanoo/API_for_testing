@@ -50,11 +50,10 @@ class TestApp(unittest.TestCase):
         self.assertIn(b'Searching posts with character '
                       b'length between 5 and 10', response.data)
 
-    @patch('main.requests.get')
-    def test_handle_error(self, mock_get):
-        mock_get.side_effect = Exception('Test Error')
-        with app.test_client() as client:
-            response = client.get('/posts')
+    def test_handle_error(self):
+        with patch('main.requests.get') as mock_get:
+            mock_get.side_effect = Exception('Test Error')
+            response = self.app.get('/posts')
             self.assertEqual(response.status_code, 500)
             self.assertIn(b'An unexpected error occurred', response.data)
 
