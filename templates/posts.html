@@ -15,10 +15,10 @@
             </div>
             <div class="filter">
                 <label for="minChars">Minimum length of post:</label>
-                <input type="number" id="minChars" name="minChars">
+                <input type="number" id="minChars" name="minChars" onkeypress="handleKeyPress(event)">
                 <br>
                 <label for="maxChars">Maximum length of post:</label>
-                <input type="number" id="maxChars" name="maxChars">
+                <input type="number" id="maxChars" name="maxChars" onkeypress="handleKeyPress(event)">
                 <br>
                 <button onclick="filterPosts()" id="apply_button">Apply</button>
             </div>
@@ -102,7 +102,11 @@
                 }
             }
         }
-
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                filterPosts();
+            }
+        }
 
 
     </script>

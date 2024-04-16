@@ -15,7 +15,7 @@
             </div>
             <div class="elements">
                     <label for="num_of_elements">How many elements? </label>
-                    <input type="number" id="num_of_elements" name="num_of_elements">
+                    <input type="number" id="num_of_elements" name="num_of_elements" onkeypress="handleKeyPress(event)">
                     <br>
                     <button onclick="numberOfElements()" id="apply_button">Apply</button>
             </div>
@@ -97,7 +97,11 @@
                 }
             }
         }
-
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                numberOfElements();
+            }
+        }
 
     </script>
 </body>
