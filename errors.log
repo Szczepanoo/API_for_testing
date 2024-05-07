@@ -1,0 +1,11 @@
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:40] "GET /posts HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:41] "[36mGET /static/other_style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:42] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:42] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:43] "GET /comments HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:43] "[36mGET /static/other_style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:45] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/May/2024 08:25:45] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
