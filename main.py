@@ -10,7 +10,7 @@ import requests
 from requests.exceptions import HTTPError, Timeout
 from sqlalchemy.exc import DatabaseError
 import pstats
-import cProfile
+# import cProfile
 
 app = Flask(__name__)
 
@@ -182,7 +182,8 @@ def analyze_io_blocking_functions(profile_stats_file):
     """
     Analizuje wynik profilowania i identyfikuje funkcje blokujące IO.
 
-    :param profile_stats_file: Ścieżka do pliku ze statystykami profilowania (wygenerowanego przez cProfile).
+    :param profile_stats_file: Ścieżka do pliku ze statystykami
+    profilowania (wygenerowanego przez cProfile).
     """
     # Wczytaj statystyki profilowania
     stats = pstats.Stats(profile_stats_file)
@@ -193,7 +194,8 @@ def analyze_io_blocking_functions(profile_stats_file):
     # Wydrukuj listę funkcji, które wywołują funkcje blokujące IO
     print("Funkcje blokujące IO:")
     for func, (_, file_name, line_number, _, _) in stats.stats.items():
-        # Sprawdź, czy funkcja zawiera wywołania do metod związanych z operacjami sieciowymi
+        # Sprawdź, czy funkcja zawiera wywołania do metod
+        # związanych z operacjami sieciowymi
         if 'requests.get' in func:
             print(f"Function: {func}, File: {file_name}, Line: {line_number}")
 
@@ -201,9 +203,11 @@ def analyze_io_blocking_functions(profile_stats_file):
 if __name__ == '__main__':
     # print("Aplikacja uruchomiona. Przejdź do:", "http://127.0.0.1:5000/")
     # # app.run(debug=True, use_reloader=False)
-    # cProfile.run('app.run(debug=True, use_reloader=False)', filename="app_profile_stats")
+    # cProfile.run('app.run(debug=True, use_reloader=False)',
+    # filename="app_profile_stats")
 
-    # profile_stats_file = 'app_profile_stats'  # Ścieżka do pliku ze statystykami profilowania
+    # Ścieżka do pliku ze statystykami profilowania
+    # profile_stats_file = 'app_profile_stats'
     # analyze_io_blocking_functions(profile_stats_file)
 
     p = pstats.Stats('app_profile_stats')
