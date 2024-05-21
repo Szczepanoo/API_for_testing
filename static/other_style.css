@@ -87,6 +87,8 @@ a {
 .post:hover {
   background-color: #5e96ee;
   cursor: pointer;
+  box-shadow: 0 16px 24px 0 rgba(0,0,0,0.5);
+  transition: 0.5s;
 }
 
 .post h2 {
@@ -259,9 +261,11 @@ a {
     width: calc(20% - 20px); /* Ustaw szerokość każdego zdjęcia na 20% szerokości ekranu minus odstęp */
 }
 
-#photo:hover {
+img:hover {
   cursor: pointer;
+  box-shadow: 0 16px 24px 0 rgba(0,0,0,0.5);
   opacity: 0.8;
+  transition: 0.5s;
 }
 
 #view {
@@ -295,7 +299,7 @@ a {
     text-align: center; /* Wyśrodkowanie zawartości */
     align-items: center;
     background-color: #4389de;
-    border: 1px solid rgb(215, 160, 71);
+    border: 2px solid rgb(215, 160, 71);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px; /* Dodanie marginesu na dole dla odstępu między albumami */
@@ -304,8 +308,43 @@ a {
 .album:hover {
     background-color: #5e96ee;
     color: rgb(215, 160, 71);
+    box-shadow: 0 16px 24px 0 rgba(0,0,0,0.5);
+    transition: 0.5s;
 }
 
 .hidden {
             display: none;
+}
+
+.loadMoreButton {
+  font-size: 24px;
+  font-weight: bold;
+  margin: auto;
+  display: block;
+  align-self: center;
+  text-align: center;
+  background-color: transparent;
+  color: burlywood;
+  border: 3px solid burlywood;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.loadMoreButton:hover {
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.5);
+  background-color: burlywood;
+  color: #5e96ee;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+#loadMorePostsButton {
+  border: 3px solid #5e96ee;
+  color: #5e96ee;
+}
+
+#loadMorePostsButton:hover {
+  background-color: #5e96ee;
+  color: burlywood;
 }

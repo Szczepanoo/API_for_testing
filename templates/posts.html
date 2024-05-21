@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('css_other_style') }}">
     <title>Posts</title>
+    <style>
+        .post {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -25,15 +30,9 @@
         </div>
     </header>
     <div class="container" id="posts">
-        {% for post in posts %}
-        <div class="post" onclick="showModal('{{ post.title }}', '{{ post.body }}', '{{ post.userId }}', '{{ post.id }}')">
-            <h2>{{ post.title }}</h2>
-            <p class="post_body">{{ post.body }}</p>
-            <p>User ID: {{ post.userId }}</p>
-            <p>ID: {{ post.id }}</p>
-        </div>
-        {% endfor %}
+        <!-- Posts will be loaded here dynamically -->
     </div>
+    <button class="loadMoreButton" id="loadMorePostsButton" onclick="loadMorePosts()">Load more posts</button>
 
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -46,69 +45,75 @@
     </div>
 
     <script>
+        const posts = {{ posts | tojson }};
+        const postsPerPage = 50;
+        let currentIndex = 0;
+
         document.addEventListener('DOMContentLoaded', function() {
-    const posts = document.querySelectorAll('.post');
-    const modal = document.getElementById('myModal');
-    const closeBtn = document.querySelector('.close');
-
-    posts.forEach(post => {
-        post.addEventListener('click', () => {
-            showModal(post);
+            loadMorePosts();
         });
-    });
 
-    closeBtn.addEventListener('click', closeModal);
+        function loadMorePosts() {
+            const container = document.getElementById('posts');
+            const endIndex = Math.min(currentIndex + postsPerPage, posts.length);
+            for (let i = currentIndex; i < endIndex; i++) {
+                const post = posts[i];
+                const postDiv = document.createElement('div');
+                postDiv.className = 'post';
+                postDiv.onclick = () => showModal(post.title, post.body, post.userId, post.id);
+                postDiv.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p class="post_body">${post.body}</p>
+                    <p>User ID: ${post.userId}</p>
+                    <p>ID: ${post.id}</p>
+                `;
+                container.appendChild(postDiv);
+            }
+            currentIndex = endIndex;
+            if (currentIndex >= posts.length) {
+                document.getElementById('loadMorePostsButton').style.display = 'none';
+            }
+        }
 
-    function showModal(post) {
-    const title = post.querySelector('h2').innerHTML;
-    const body = post.querySelector('.post_body').innerHTML;
-    const userId = post.querySelector('p:nth-child(3)').innerHTML.split(": ")[1]; // Pobieramy User ID
-    const id = post.querySelector('p:nth-child(4)').innerHTML.split(": ")[1]; // Pobieramy ID
+        function showModal(title, body, userId, id) {
+            document.getElementById('postTitle').innerText = title;
+            document.getElementById('postBody').innerText = body;
+            document.getElementById('postUserId').innerText = userId;
+            document.getElementById('postId').innerText = id;
+            document.getElementById('myModal').style.display = 'block';
+        }
 
-    document.getElementById('postTitle').innerHTML = title;
-    document.getElementById('postBody').innerHTML = body;
-    document.getElementById('postUserId').innerHTML = userId;
-    document.getElementById('postId').innerHTML = id;
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
 
-    modal.style.display = 'block';
-}
-
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-});
         function filterPosts() {
-            var minChars = parseInt(document.getElementById("minChars").value);
-            var maxChars = parseInt(document.getElementById("maxChars").value);
-
-            var posts = document.getElementsByClassName("post");
-
+            const minChars = parseInt(document.getElementById("minChars").value) || 0;
+            const maxChars = parseInt(document.getElementById("maxChars").value) || Infinity;
+            const posts = document.getElementsByClassName("post");
 
             if (minChars < 0 || maxChars < 0) {
                 alert("Filter values cannot be negative");
-                minCharsInput.value = "";
                 return;
             }
 
-            for (var i = 0; i < posts.length; i++) {
-                var post = posts[i];
-                var postBody = post.querySelector(".post_body").innerText;
-                var postLength = postBody.length;
+            for (const post of posts) {
+                const postBody = post.querySelector(".post_body").innerText;
+                const postLength = postBody.length;
 
-                if ((minChars && postLength < minChars) || (maxChars && postLength > maxChars)) {
+                if (postLength < minChars || postLength > maxChars) {
                     post.style.display = "none";
                 } else {
                     post.style.display = "block";
                 }
             }
         }
+
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
                 filterPosts();
             }
         }
-
-
     </script>
 </body>
 </html>
