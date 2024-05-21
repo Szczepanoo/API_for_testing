@@ -12,13 +12,10 @@
         <h1>Photos</h1>
     </header>
     <div class="contener">
-        <div class="photos-container">
-            {% for photo in photos %}
-            <div class="photo" onclick="showModal('{{ photo.title }}', '{{ photo.url }}', '{{ photo.thumbnailUrl }}', '{{ photo.albumId }}')">
-                <img id="photo" src="{{ photo.thumbnailUrl }}" alt="Photo">
-            </div>
-            {% endfor %}
+        <div id="photosContainer" class="photos-container">
+            <!-- Photos will be loaded here -->
         </div>
+        <button id="loadMoreButton" onclick="loadMorePhotos()">Load more photos</button>
     </div>
 
     <div id="myModal" class="modal">
@@ -32,6 +29,30 @@
     </div>
 
     <script>
+        const photos = {{ photos | tojson }};
+        let currentIndex = 0;
+        const photosPerPage = 50;
+
+        function loadMorePhotos() {
+            const container = document.getElementById('photosContainer');
+            const endIndex = Math.min(currentIndex + photosPerPage, photos.length);
+            for (let i = currentIndex; i < endIndex; i++) {
+                const photo = photos[i];
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo';
+                photoDiv.onclick = () => showModal(photo.title, photo.url, photo.thumbnailUrl, photo.albumId);
+                const img = document.createElement('img');
+                img.src = photo.thumbnailUrl;
+                img.alt = 'Photo';
+                photoDiv.appendChild(img);
+                container.appendChild(photoDiv);
+            }
+            currentIndex = endIndex;
+            if (currentIndex >= photos.length) {
+                document.getElementById('loadMoreButton').style.display = 'none';
+            }
+        }
+
         function showModal(title, url, thumbnailUrl, albumId) {
             const modal = document.getElementById('myModal');
             const modalPhoto = document.getElementById('modalPhoto');
@@ -51,6 +72,9 @@
             const modal = document.getElementById('myModal');
             modal.style.display = 'none';
         }
+
+        // Initial load of photos
+        loadMorePhotos();
     </script>
 </body>
 </html>

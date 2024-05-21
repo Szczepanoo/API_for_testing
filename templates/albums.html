@@ -12,13 +12,10 @@
         <h1>Albums</h1>
     </header>
     <div class="contener">
-        <div class="albums-container">
-            {% for album in albums %}
-            <div class="album" onclick="showPhotos('{{ album.id }}', '{{ album.title }}')">
-                <h2>{{ album.id }}. {{ album.title }}</h2>
-            </div>
-            {% endfor %}
+        <div id="albumsContainer" class="albums-container">
+            <!-- Albums will be loaded here -->
         </div>
+        <button class="loadMoreButton" onclick="loadMoreAlbums()">Load more albums</button>
     </div>
 
     <div id="myModal" class="modal">
@@ -27,37 +24,80 @@
             <h2 id="albumTitle"></h2>
             <!-- Dodajemy photos-container do wyświetlania zdjęć -->
             <div id="photosContainer" class="photos-container"></div>
+            <button class="loadMoreButton" onclick="loadMorePhotos()">Load more photos</button>
         </div>
     </div>
 
     <script>
+        const albums = {{ albums | tojson }};
+        const albumsPerPage = 10;
+        let currentAlbumIndex = 0;
+
+        function loadMoreAlbums() {
+            const container = document.getElementById('albumsContainer');
+            const endIndex = Math.min(currentAlbumIndex + albumsPerPage, albums.length);
+            for (let i = currentAlbumIndex; i < endIndex; i++) {
+                const album = albums[i];
+                const albumDiv = document.createElement('div');
+                albumDiv.className = 'album';
+                albumDiv.onclick = () => showPhotos(album.id, album.title);
+                albumDiv.innerHTML = `<h2>${album.id}. ${album.title}</h2>`;
+                container.appendChild(albumDiv);
+            }
+            currentAlbumIndex = endIndex;
+            if (currentAlbumIndex >= albums.length) {
+                document.getElementById('loadMoreAlbumsButton').style.display = 'none';
+            }
+        }
+
+        const photosPerPage = 10;
+        let currentPhotos = [];
+        let currentPhotoIndex = 0;
+
         function showPhotos(albumId, albumTitle) {
             const modal = document.getElementById('myModal');
             const photosContainer = document.getElementById('photosContainer');
             const albumTitleElement = document.getElementById('albumTitle');
+            const loadMorePhotosButton = document.getElementById('loadMorePhotosButton');
 
             // Clear previous content
             photosContainer.innerHTML = '';
+            currentPhotos = [];
+            currentPhotoIndex = 0;
 
             // Set album title
             albumTitleElement.innerText = albumTitle;
 
-            // Fetch photos for the selected albumId and display them
+            // Fetch photos for the selected albumId
             fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
                 .then(response => response.json())
                 .then(photos => {
-                    photos.forEach(photo => {
-                        const photoElement = document.createElement('div');
-                        photoElement.classList.add('photo');
-                        photoElement.innerHTML = `
-                            <img id="photo" src="${photo.thumbnailUrl}" alt="Photo" onclick="viewPhoto('${photo.url}')">
-                        `;
-                        photosContainer.appendChild(photoElement);
-                    });
+                    currentPhotos = photos;
+                    loadMorePhotos();
                 });
 
             // Show modal
             modal.style.display = 'block';
+            loadMorePhotosButton.style.display = 'block';
+        }
+
+        function loadMorePhotos() {
+            const photosContainer = document.getElementById('photosContainer');
+            const loadMorePhotosButton = document.getElementById('loadMorePhotosButton');
+            const endIndex = Math.min(currentPhotoIndex + photosPerPage, currentPhotos.length);
+            for (let i = currentPhotoIndex; i < endIndex; i++) {
+                const photo = currentPhotos[i];
+                const photoElement = document.createElement('div');
+                photoElement.classList.add('photo');
+                photoElement.innerHTML = `
+                    <img id="photo" src="${photo.thumbnailUrl}" alt="Photo" onclick="viewPhoto('${photo.url}')">
+                `;
+                photosContainer.appendChild(photoElement);
+            }
+            currentPhotoIndex = endIndex;
+            if (currentPhotoIndex >= currentPhotos.length) {
+                loadMorePhotosButton.style.display = 'none';
+            }
         }
 
         function closeModal() {
@@ -68,6 +108,9 @@
         function viewPhoto(photoUrl) {
             window.open(photoUrl, '_blank');
         }
+
+        // Initial load of albums
+        loadMoreAlbums();
     </script>
 </body>
 </html>
