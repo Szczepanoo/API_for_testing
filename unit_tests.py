@@ -44,9 +44,11 @@ class FlaskAppTests(unittest.TestCase):
         self.assertIn(b'Invalid display limit', response.data)
 
     def test_search_posts(self):
-        response = self.app.post('/search_posts', json={'min_length': 10, 'max_length': 100})
+        response = (self.app.post
+                    ('/search_posts', json={'min_length': 10, 'max_length': 100}))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Searching posts with character length', response.data)
+
 
 if __name__ == "__main__":
     unittest.main()
