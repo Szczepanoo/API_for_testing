@@ -45,7 +45,8 @@ class FlaskAppTests(unittest.TestCase):
 
     def test_search_posts(self):
         response = (self.app.post
-                    ('/search_posts', json={'min_length': 10, 'max_length': 100}))
+                    ('/search_posts', json={'min_length': 10,
+                                            'max_length': 100}))
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Searching posts with character length', response.data)
 
